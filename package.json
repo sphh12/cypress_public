@@ -1,0 +1,31 @@
+{
+  "type": "commonjs",
+  "scripts": {
+    "view": "docker compose --profile view up cypress-view",
+    "dev": "docker compose --profile dev up cypress-dev",
+    "test": "docker compose up cypress"
+  },
+  "dependencies": {
+    "cypress": "^15.14.1",
+    "cypress-clipboard": "^1.0.3",
+    "cypress-iframe": "^1.0.1",
+    "cypress-real-events": "^1.15.0",
+    "cypress-repeat": "^2.3.6",
+    "cypress-xpath": "^2.0.1",
+    "dayjs": "^1.11.12",
+    "dotenv": "^16.4.5",
+    "googleapis": "^126.0.0",
+    "mocha": "^10.6.0",
+    "mochawesome": "^7.1.3",
+    "mochawesome-merge": "^4.3.0",
+    "mochawesome-report-generator": "^6.2.0",
+    "puppeteer": "^22.9.0",
+    "socket.io": "^4.8.1",
+    "typescript": "^5.4.5"
+  },
+  "devDependencies": {
+    "@cypress/grep": "^4.1.0",
+    "cypress-mochawesome-reporter": "^3.8.2",
+    "eslint": "^9.7.0"
+  }
+}

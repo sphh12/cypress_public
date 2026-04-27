@@ -1,0 +1,68 @@
+services:
+    # 메인 테스트 (docker compose up)
+    cypress:
+        image: cypress/browsers:node-24.11.1-chrome-142.0.7444.175-1-ff-145.0.1-edge-142.0.3595.90-1
+        container_name: cypress-test
+        network_mode: host
+        environment:
+            - TZ=Asia/Seoul
+            - CYPRESS_RECORD_KEY=${CYPRESS_RECORD_KEY}
+            - SMTP_HOST=smtp.gmail.com
+            - SMTP_PORT=587
+            - SMTP_USER=${SMTP_USER}
+            - SMTP_PASS=${SMTP_PASS}
+            - ENVIRONMENT=Docker
+            - SPEC_FILE=cypress/e2e/test/GME/gme.cy.js
+            - GOOGLE_DRIVE_FOLDER_ID=${GOOGLE_DRIVE_FOLDER_ID}
+        volumes:
+            - .:/app
+            - ${CYPRESS_HISTORY_DIR:-./cypress-history}:/app/cypress-history
+        working_dir: /app
+        command: sh /app/shell/run-test.sh
+
+    # 개발 테스트 (docker compose --profile dev up)
+    # Xvfb + xdotool로 브라우저 네이티브 팝업 처리
+    cypress-dev:
+        profiles: ["dev"]
+        build:
+            context: .
+            dockerfile: Dockerfile
+        container_name: cypress-dev
+        network_mode: host
+        shm_size: '2gb'
+        environment:
+            - TZ=Asia/Seoul
+            - CYPRESS_RECORD_KEY=${CYPRESS_RECORD_KEY}
+            - SMTP_HOST=smtp.gmail.com
+            - SMTP_PORT=587
+            - SMTP_USER=${SMTP_USER}
+            - SMTP_PASS=${SMTP_PASS}
+            - ENVIRONMENT=Docker-Dev
+            - SPEC_FILE=cypress/e2e/test/GME/gme_dev.cy.js
+            - GOOGLE_DRIVE_FOLDER_ID=${GOOGLE_DRIVE_FOLDER_ID}
+        volumes:
+            - .:/app
+            - ${CYPRESS_HISTORY_DIR:-./cypress-history}:/app/cypress-history
+        working_dir: /app
+        command: sh /app/shell/run-sample.sh
+
+    # View 테스트 (docker compose --profile view up)
+    cypress-view:
+        profiles: ["view"]
+        image: cypress/browsers:node-24.11.1-chrome-142.0.7444.175-1-ff-145.0.1-edge-142.0.3595.90-1
+        container_name: cypress-view
+        network_mode: host
+        environment:
+            - TZ=Asia/Seoul
+            - CYPRESS_RECORD_KEY=${CYPRESS_RECORD_KEY}
+            - SMTP_HOST=smtp.gmail.com
+            - SMTP_PORT=587
+            - SMTP_USER=${SMTP_USER}
+            - SMTP_PASS=${SMTP_PASS}
+            - ENVIRONMENT=Docker-View
+            - GOOGLE_DRIVE_FOLDER_ID=${GOOGLE_DRIVE_FOLDER_ID}
+        volumes:
+            - .:/app
+            - C:/Users/GME/Desktop/cypress history:/app/cypress-history
+        working_dir: /app
+        command: sh /app/shell/run-customer.sh

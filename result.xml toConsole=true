@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="Mocha Tests" time="37.642" tests="1" failures="1">
+  <testsuite name="Root Suite" timestamp="2024-06-11T02:32:19" tests="0" file="cypress\e2e\floaty-1.cy.js" time="0.000" failures="0">
+  </testsuite>
+  <testsuite name="Floaty-test_1" timestamp="2024-06-11T02:32:19" tests="1" time="37.635" failures="1">
+    <testcase name="Floaty-test_1 로그인-파일첨부-용량 초기화" time="0.000" classname="로그인-파일첨부-용량 초기화">
+      <failure message="Timed out retrying after 10000ms: Expected to find content: &apos;업로드가 성공하였습니다.&apos; but never did." type="AssertionError"><![CDATA[AssertionError: Timed out retrying after 10000ms: Expected to find content: '업로드가 성공하였습니다.' but never did.
+    at Context.eval (webpack:///./cypress/e2e/floaty-1.cy.js:21:7)]]></failure>
+    </testcase>
+  </testsuite>
+</testsuites>
